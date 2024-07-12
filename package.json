@@ -2,16 +2,10 @@
   "name": "@laserdrive/common",
   "version": "1.0.0",
   "description": "",
-  "main": "src/app.ts",
-  "type": "module",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
   "scripts": {
-    "build": "tsc",
-    "start": "nodemon",
-    "seed:users": "npm run build && node build/seeders/user.js",
-    "lint": "npm run lint:js ",
-    "lint:eslint": "eslint --ignore-path .gitignore --ext .ts",
-    "lint:js": "npm run lint:eslint src/",
-    "lint:fix": "npm run lint:js -- --fix"
+    "build": "tsc"
   },
   "author": "Confidence Yobo",
   "license": "ISC",

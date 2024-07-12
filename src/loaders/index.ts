@@ -6,7 +6,7 @@ import { WalletSchema } from "../schema/wallet";
 import { GameSessionSchema } from "../schema/game-session";
 import { PlayerEntrySchema } from "../schema/player-entry";
 
-export default async () => {
+export const loaders = async () => {
   const dbInstance = await dbLoader();
   Logger.info("✌️ DB loaded and connected!");
 
@@ -30,6 +30,7 @@ export default async () => {
     schema: PlayerEntrySchema,
   };
 
+  // @ts-ignore
   await dependencyInjectorLoader(dbInstance, {
     schemas: [userSchema, walletSchema, gameSessionSchema, playerEntrySchema],
   });
