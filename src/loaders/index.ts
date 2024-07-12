@@ -35,5 +35,4 @@ export default async () => {
   });
   Logger.info("✌️ Dependency Injector loaded");
 
-  Logger.info("✌️ Express loaded");
 };
