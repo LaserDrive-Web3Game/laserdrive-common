@@ -1,0 +1,45 @@
+{
+  "name": "@laserdrive/common",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/app.ts",
+  "scripts": {
+    "build": "tsc",
+    "start": "nodemon",
+    "seed:users": "npm run build && node build/seeders/user.js",
+    "lint": "npm run lint:js ",
+    "lint:eslint": "eslint --ignore-path .gitignore --ext .ts",
+    "lint:js": "npm run lint:eslint src/",
+    "lint:fix": "npm run lint:js -- --fix"
+  },
+  "author": "Confidence Yobo",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "drizzle-orm": "^0.31.2",
+    "lodash": "^4.17.21",
+    "pg": "^8.12.0",
+    "reflect-metadata": "^0.2.2",
+    "typedi": "^0.10.0",
+    "winston": "^3.13.0",
+    "winston-transport": "^4.7.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.2",
+    "@types/pg": "^8.11.6",
+    "@types/supertest": "^6.0.2",
+    "@typescript-eslint/eslint-plugin": "^6.7.1",
+    "@typescript-eslint/parser": "^6.7.1",
+    "drizzle-kit": "^0.22.7",
+    "eslint": "^8.48.0",
+    "eslint-config-prettier": "^9.1.0",
+    "globals": "^15.6.0",
+    "nodemon": "^3.1.3",
+    "supertest": "^7.0.0",
+    "ts-mockito": "^2.6.1",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "tslint": "^5.20.1",
+    "typescript": "^5.4.5"
+  }
+}
