@@ -1,3 +1,5 @@
-export * from './schema/index';
+export * from './schema';
+export * from './interfaces';
 export * from './utils';
-export { loaders } from './loaders';
+export * from './loaders/db';
+export * from './loaders/logger';

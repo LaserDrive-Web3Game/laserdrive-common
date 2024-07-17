@@ -1,11 +1,4 @@
-import { UserSchema } from "./user";
-import { PlayerEntrySchema } from "./player-entry";
-import { WalletSchema } from "./wallet";
-import { GameSessionSchema } from "./game-session";
-
-export default {
-  UserSchema,
-  WalletSchema,
-  GameSessionSchema,
-  PlayerEntrySchema,
-};
+export * from "./user";
+export * from "./player-entry";
+export * from "./wallet";
+export * from "./game-session";
