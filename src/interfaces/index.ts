@@ -22,3 +22,14 @@ export interface IWallet {
   user: number;
   balance: string;
 }
+
+export interface IPlayerEntry {
+  id: number;
+  createdAt: Date;
+  updatedAt: Date;
+  status: string;
+  user: number;
+  gameSession: number;
+  amount: string;
+  exitPoint: string;
+}
