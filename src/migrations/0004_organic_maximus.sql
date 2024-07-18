@@ -1,0 +1,1 @@
+ALTER TYPE "gameStatus" ADD VALUE 'preparing';

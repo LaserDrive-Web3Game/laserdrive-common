@@ -1,10 +1,10 @@
 import { serial, decimal, pgEnum, timestamp, pgTable } from 'drizzle-orm/pg-core';
 
-export const gameStatusEnum = pgEnum('gameStatus', ['active', 'done']);
+export const gameStatusEnum = pgEnum('gameStatus', ['active', 'done', 'preparing']);
 
 export const GameSessionSchema = pgTable('game_session', {
   id: serial('id').primaryKey(),
-  status: gameStatusEnum('game_status').default('active'),
+  status: gameStatusEnum('game_status').default('preparing'),
   finalMultiplier: decimal('final_multiplier', { precision: 10, scale: 2 }),
 
   createdAt: timestamp('created_at').$default(() => new Date()),

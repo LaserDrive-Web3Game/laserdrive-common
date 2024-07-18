@@ -1,0 +1,1 @@
+ALTER TABLE "game_session" ALTER COLUMN "game_status" SET DEFAULT 'preparing';
