@@ -5,3 +5,5 @@ export * from './loaders/db';
 export * from './loaders/logger';
 export * from './config/constants';
 export * from './helpers/formatters';
+export * from './repository/gameRepository';
+export * from './repository/userRepository';

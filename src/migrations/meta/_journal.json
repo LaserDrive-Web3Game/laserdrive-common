@@ -43,6 +43,13 @@
       "when": 1721289173496,
       "tag": "0005_glorious_harpoon",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1722119510690,
+      "tag": "0006_blue_kronos",
+      "breakpoints": true
     }
   ]
 }

@@ -4,3 +4,5 @@ export const BIG_TEN = new BigNumber(10);
 
 export const DEFAULT_TOKEN_DECIMAL = BIG_TEN.pow(18);
 export const DEFAULT_GAS_LIMIT = 500000;
+
+export const JWT_SECRET = process.env.JWT_SECRET;

@@ -1,18 +1,18 @@
 import { generateNonce } from "../utils";
 import {
   serial,
-  char,
   uniqueIndex,
   timestamp,
   pgTable,
+  text,
 } from "drizzle-orm/pg-core";
 
 export const UserSchema = pgTable(
   "users",
   {
     id: serial("id").primaryKey(),
-    address: char("address", { length: 300 }).notNull(),
-    nonce: char("nonce", { length: 50 }).$default(() => generateNonce()),
+    address: text("address").notNull(),
+    nonce: text("nonce").$default(() => generateNonce()),
 
     createdAt: timestamp("created_at").$default(() => new Date()),
     updatedAt: timestamp("updated_at", {
