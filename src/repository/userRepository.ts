@@ -53,10 +53,10 @@ export class UserRepository {
     return queryset[0] as IWallet;
   }
 
-  async createUserWallet(userId: number): Promise<IWallet> {
+  async createUserWallet(userId: number, defaultBalance='0'): Promise<IWallet> {
     const resp = await this.db
       .insert(this.walletSchema)
-      .values({ user: userId })
+      .values({ user: userId, balance: defaultBalance })
       .returning({ id: this.walletSchema.id, user: this.walletSchema.user, balance: this.walletSchema.balance });
     return resp[0] as IWallet;
   }

@@ -66,8 +66,6 @@ export class GameRepository {
   }
 
   async endGameSession(finalMultiplier: string) {
-    const minimumMultiplier = '1';
-
     await this.db.transaction(async tx => {
       const game = await tx
         .update(this.gameSessionSchema)
@@ -81,7 +79,7 @@ export class GameRepository {
         .where(
           and(
             eq(this.playerEntrySchema.gameSession, game[0].id),
-            lt(this.playerEntrySchema.exitPoint, minimumMultiplier),
+            eq(this.playerEntrySchema.status, PLAYER_STATE_ACTIVE),
           ),
         );
     });
@@ -94,14 +92,14 @@ export class GameRepository {
         .from(this.walletSchema)
         .where(eq(this.walletSchema.user, userId));
 
-      if (wallet.balance < amount.toJSON()) {
+      if (Number(wallet.balance) < Number(amount.toFixed())) {
         await tx.rollback();
         return;
       }
 
       await tx
         .update(this.walletSchema)
-        .set({ balance: sql`${this.walletSchema.balance} - ${amount.toJSON()}` })
+        .set({ balance: sql`${this.walletSchema.balance} - ${Number(amount.toFixed())}` })
         .where(eq(this.walletSchema.user, userId));
 
       const gameEntry = await tx
@@ -109,7 +107,7 @@ export class GameRepository {
         .values({
           user: userId,
           gameSession: gameSessionId,
-          amount: amount.toJSON(),
+          amount: amount.toFixed(),
         })
         .returning({
           id: this.gameSessionSchema.id,
@@ -168,7 +166,7 @@ export class GameRepository {
       const reward = new BigNumber(entry.amount).multipliedBy(currentMultiplier);
       const [wallet] = await tx
         .update(this.walletSchema)
-        .set({ balance: sql`${this.walletSchema.balance} + ${reward.toJSON()}` })
+        .set({ balance: sql`${this.walletSchema.balance} + ${Number(reward.toFixed())}` })
         .returning({ balance: this.walletSchema.balance });
 
       return wallet.balance;
