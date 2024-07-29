@@ -1,0 +1,71 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'  # Triggers the workflow on version tag push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'  # Specify your Node.js version
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build package
+      run: npm run build  # Replace with your build command, if applicable
+
+    - name: Create tarball
+      run: |
+        mkdir -p dist
+        tar -czf dist/laserdrive-common.tar.gz -C ./ build  # Adjust path and package name
+        echo "Tarball created: dist/laserdrive-common.tar.gz"
+
+    - name: Upload tarball as artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: your-package
+        path: dist/laserdrive-common.tar.gz
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Download tarball artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: your-package
+
+    - name: Create GitHub Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        draft: false
+        prerelease: false
+
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: dist/laserdrive-common.tar.gz
+        asset_name: laserdrive-common.tar.gz
+        asset_content_type: application/gzip
