@@ -1,0 +1,63 @@
+name: Build and Release
+
+permissions: write-all
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build package
+      run: npm run build
+
+    - name: Create tarball
+      run: |
+        mkdir -p tmp
+        cp -r dist tmp/
+        tar -czf tmp/laserdrive-common.tar.gz -C . dist
+        echo "Tarball created: tmp/laserdrive-common.tar.gz"
+
+    - name: Upload tarball as artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: LaserdriveCommon
+        path: tmp/laserdrive-common.tar.gz
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Download tarball artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: LaserdriveCommon
+
+    - name: Release
+      id: create_release
+      uses: softprops/action-gh-release@v2
+      with:
+        files: laserdrive-common.tar.gz
+        draft: false
+        prerelease: false
