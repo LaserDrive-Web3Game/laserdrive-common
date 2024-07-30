@@ -28,16 +28,17 @@ jobs:
 
     - name: Create tarball
       run: |
-        mkdir -p tmp
-        cp -r dist tmp/
-        tar -czf tmp/laserdrive-common.tar.gz -C . dist
+        mkdir -p package/
+        cp -r dist package/
+        cp package.json package
+        tar -czf laserdrive-common.tar.gz -C . package
         echo "Tarball created: tmp/laserdrive-common.tar.gz"
 
     - name: Upload tarball as artifact
       uses: actions/upload-artifact@v3
       with:
         name: LaserdriveCommon
-        path: tmp/laserdrive-common.tar.gz
+        path: laserdrive-common.tar.gz
 
   release:
     needs: build
