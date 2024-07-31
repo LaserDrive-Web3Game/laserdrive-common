@@ -5,50 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1718814983955,
-      "tag": "0000_absent_skin",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1720790898855,
-      "tag": "0001_chemical_sue_storm",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1720800685337,
-      "tag": "0002_cute_jean_grey",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "7",
-      "when": 1720800758209,
-      "tag": "0003_light_exiles",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "7",
-      "when": 1721289163823,
-      "tag": "0004_organic_maximus",
-      "breakpoints": true
-    },
-    {
-      "idx": 5,
-      "version": "7",
-      "when": 1721289173496,
-      "tag": "0005_glorious_harpoon",
-      "breakpoints": true
-    },
-    {
-      "idx": 6,
-      "version": "7",
-      "when": 1722119510690,
-      "tag": "0006_blue_kronos",
+      "when": 1722421459341,
+      "tag": "0000_romantic_sleepwalker",
       "breakpoints": true
     }
   ]
